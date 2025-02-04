@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-of-apps
+  namespace: argocd-namespace-1
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:Imma016/argo-apps.git
+    targetRevision: HEAD
+    path: apps/
+  destination:
+    name: in-cluster
+    namespace: argocd-namespace-1

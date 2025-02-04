@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-2
+  namespace: argocd-namespace-2
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: nginx
+    targetRevision: 18.3.5
+    helm:
+      releaseName: nginx-2
+      values: |
+        replicaCount: 1
+  destination:
+    name: in-cluster
+    namespace: argocd-namespace-2
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
