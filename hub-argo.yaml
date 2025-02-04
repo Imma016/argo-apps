@@ -12,3 +12,9 @@ spec:
   destination:
     name: in-cluster
     namespace: argocd-namespace-1
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
